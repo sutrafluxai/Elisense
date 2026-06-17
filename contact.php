@@ -21,62 +21,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$flashMessage = 'Please provide a valid email address.';
 		$flashType = 'error';
 	} else {
-		// Database connection (XAMPP defaults: user "root", password "")
-		$host = 'localhost';
-		$user = 'root';
-		$pass = '';
-		$initialDb = '';
+		// Remote Database connection using Environment Variables
+		$host = getenv('DB_HOST');
+		$user = getenv('DB_USER');
+		$pass = getenv('DB_PASS');
+		$dbName = getenv('DB_NAME');
 
-		$mysqli = @new mysqli($host, $user, $pass, $initialDb);
+		$mysqli = @new mysqli($host, $user, $pass, $dbName);
 		if ($mysqli->connect_error) {
 			$flashMessage = 'Database connection failed.';
 			$flashType = 'error';
 		} else {
-			// Create database if it does not exist
-			$createDbSql = "CREATE DATABASE IF NOT EXISTS `elisense` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-			if (!$mysqli->query($createDbSql)) {
-				$flashMessage = 'Failed to ensure database exists.';
+			// Create table if it does not exist
+			$createTableSql = "CREATE TABLE IF NOT EXISTS `inquires` (
+				`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+				`name` VARCHAR(255) NOT NULL,
+				`email` VARCHAR(255) NOT NULL,
+				`message` TEXT NOT NULL,
+				`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (`id`),
+				INDEX `idx_created_at` (`created_at`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+			if (!$mysqli->query($createTableSql)) {
+				$flashMessage = 'Failed to ensure table exists.';
 				$flashType = 'error';
 			} else {
-				// Select database
-				$mysqli->select_db('elisense');
-
-				// Create table if it does not exist
-				$createTableSql = "CREATE TABLE IF NOT EXISTS `inquires` (
-					`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-					`name` VARCHAR(255) NOT NULL,
-					`email` VARCHAR(255) NOT NULL,
-					`message` TEXT NOT NULL,
-					`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-					PRIMARY KEY (`id`),
-					INDEX `idx_created_at` (`created_at`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-
-				if (!$mysqli->query($createTableSql)) {
-					$flashMessage = 'Failed to ensure table exists.';
-					$flashType = 'error';
-				} else {
-					// Insert using prepared statement
-					$stmt = $mysqli->prepare('INSERT INTO `inquires` (`name`, `email`, `message`) VALUES (?, ?, ?)');
-					if ($stmt) {
-						$stmt->bind_param('sss', $name, $email, $message);
-						$ok = $stmt->execute();
-						if ($ok) {
-							$flashMessage = 'Thank you! Your message has been received.';
-							$flashType = 'success';
-							// Clear form fields after success
-							$_POST['name'] = '';
-							$_POST['email'] = '';
-							$_POST['message'] = '';
-						} else {
-							$flashMessage = 'Something went wrong while saving your inquiry.';
-							$flashType = 'error';
-						}
-						$stmt->close();
+				// Insert using prepared statement
+				$stmt = $mysqli->prepare('INSERT INTO `inquires` (`name`, `email`, `message`) VALUES (?, ?, ?)');
+				if ($stmt) {
+					$stmt->bind_param('sss', $name, $email, $message);
+					$ok = $stmt->execute();
+					if ($ok) {
+						$flashMessage = 'Thank you! Your message has been received.';
+						$flashType = 'success';
+						// Clear form fields after success
+						$_POST['name'] = '';
+						$_POST['email'] = '';
+						$_POST['message'] = '';
 					} else {
-						$flashMessage = 'Failed to prepare database statement.';
+						$flashMessage = 'Something went wrong while saving your inquiry.';
 						$flashType = 'error';
 					}
+					$stmt->close();
+				} else {
+					$flashMessage = 'Failed to prepare database statement.';
+					$flashType = 'error';
 				}
 			}
 			$mysqli->close();
@@ -227,11 +217,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body style="margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';">
     <nav role="navigation" aria-label="Primary">
         <div class="container">
-            <a href="./home.php" class="brand">Elisense Enterprise</a>
+            <a href="/" class="brand">Elisense Enterprise</a>
 
             <!-- Navigation Links Container -->
             <ul id="nav-links">
-                <li><a href="./home.php">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="./success.php">Success</a></li>
                 <li><a href="./insights.php">Insights</a></li>
                 <li><a href="./contact.php">Contact Us</a></li>

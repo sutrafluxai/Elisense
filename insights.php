@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
 
             <!-- Navigation Links Container -->
             <ul id="nav-links">
-                <li><a href="./home.php">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="./success.php">Success</a></li>
                 <li><a href="./insights.php">Insights</a></li>
                 <li><a href="./contact.php">Contact Us</a></li>
