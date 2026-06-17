@@ -315,7 +315,7 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
         .hero-section {
             position: relative;
             height: 100vh;
-            background: url('images/port-img.jpg') no-repeat center center/cover;
+            background: url('/images/port-img.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -404,11 +404,11 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
 
     <nav role="navigation" aria-label="Primary">
         <div class="container">
-            <a href="#hero" class="brand">Elisense Enterprise</a>
+            <a href="/" class="brand">Elisense Enterprise</a>
 
             <!-- Navigation Links Container -->
             <ul id="nav-links">
-                <li><a href="./home.php">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="./success.php">Success</a></li>
                 <li><a href="./insights.php">Insights</a></li>
                 <li><a href="./contact.php">Contact</a></li>
@@ -969,7 +969,7 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
             Elisense Enterprise, we solve these challenges by providing certified, reliable sourcing solutions tailored
             to your business needs.
         </p>
-        <a href="#contact"
+        <a href="/bookmeeting.php"
             style="display: inline-block; background-color: white; color: #004080; font-weight: 800; padding: 1.25rem 3.5rem; border-radius: 50px; font-size: 1.3rem; text-decoration: none; box-shadow: 0 8px 25px rgba(255, 255, 255, 0.8); transition: background-color 0.4s ease, color 0.4s ease;"
             onmouseover="this.style.backgroundColor='#d9eaff'; this.style.color='#00264d';"
             onmouseout="this.style.backgroundColor='white'; this.style.color='#004080';"
@@ -1024,7 +1024,7 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
                 style="flex: 1 1 280px; min-width: 280px; padding: 0 0.5rem;">
                 <h2 id="footer-cta-title" style="color: #00aaff; font-size: 1.8rem; margin-bottom: 1rem;">Ready to
                     Elevate Your Global Sourcing?</h2>
-                <a href="./bookmeeting.php" class="footer-cta"
+                <a href="/bookmeeting.php" class="footer-cta"
                     style="display: inline-block; background-color: #00aaff; color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 700; text-decoration: none; transition: background-color 0.3s ease;"
                     onmouseover="this.style.backgroundColor='#007acc';"
                     onmouseout="this.style.backgroundColor='#00aaff';"
@@ -1038,18 +1038,18 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
                 style="flex: 1 1 200px; min-width: 200px; padding: 0 0.5rem;">
                 <h3 style="color: #00aaff; margin-bottom: 1rem; font-weight: 700;">Quick Links</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
-                    <li><a href="#hero" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#hero" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Home</a></li>
-                    <li><a href="#about-carousel-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#about-carousel-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">About Us</a>
                     </li>
-                    <li><a href="#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';"
                             onmouseout="this.style.color='#ccc';">Certifications</a></li>
-                    <li><a href="#problem-cta-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#problem-cta-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Solutions</a>
                     </li>
-                    <li><a href="#contact" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/contact.php" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Contact</a>
                     </li>
                     <li><a href="/shipping-policy" style="color: #ccc; text-decoration: none;"

@@ -374,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 style="flex: 1 1 280px; min-width: 280px; padding: 0 0.5rem;">
                 <h2 id="footer-cta-title" style="color: #00aaff; font-size: 1.8rem; margin-bottom: 1rem;">Ready to
                     Elevate Your Global Sourcing?</h2>
-                <a href="#contact" class="footer-cta"
+                <a href="/bookmeeting.php" class="footer-cta"
                     style="display: inline-block; background-color: #00aaff; color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 700; text-decoration: none; transition: background-color 0.3s ease;"
                     onmouseover="this.style.backgroundColor='#007acc';"
                     onmouseout="this.style.backgroundColor='#00aaff';"
@@ -388,18 +388,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 style="flex: 1 1 200px; min-width: 200px; padding: 0 0.5rem;">
                 <h3 style="color: #00aaff; margin-bottom: 1rem; font-weight: 700;">Quick Links</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
-                    <li><a href="#hero" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#hero" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Home</a></li>
-                    <li><a href="#about-carousel-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#about-carousel-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">About Us</a>
                     </li>
-                    <li><a href="#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';"
                             onmouseout="this.style.color='#ccc';">Certifications</a></li>
-                    <li><a href="#problem-cta-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#problem-cta-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Solutions</a>
                     </li>
-                    <li><a href="#contact" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/contact.php" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Contact</a>
                     </li>
                     <li><a href="/shipping-policy" style="color: #ccc; text-decoration: none;"

@@ -12,56 +12,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
 		$subscribeFlash = 'Please enter a valid email address.';
 		$subscribeType = 'error';
 	} else {
-		$host = 'localhost';
-		$user = 'root';
-		$pass = '';
-		$mysqli = @new mysqli($host, $user, $pass);
+		// Remote Database connection using Environment Variables
+		$host = getenv('DB_HOST');
+		$user = getenv('DB_USER');
+		$pass = getenv('DB_PASS');
+		$dbName = getenv('DB_NAME');
+		$mysqli = @new mysqli($host, $user, $pass, $dbName);
 		if ($mysqli->connect_error) {
 			$subscribeFlash = 'Unable to connect to database.';
 			$subscribeType = 'error';
 		} else {
-			// Ensure database
-			$createDb = "CREATE DATABASE IF NOT EXISTS `elisense` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-			if ($mysqli->query($createDb)) {
-				$mysqli->select_db('elisense');
-				// Ensure table
-				$createTable = "CREATE TABLE IF NOT EXISTS `emails` (
-					`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-					`email` VARCHAR(255) NOT NULL,
-					`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-					PRIMARY KEY (`id`),
-					UNIQUE KEY `uniq_email` (`email`),
-					INDEX `idx_created_at` (`created_at`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-				if ($mysqli->query($createTable)) {
-					$stmt = $mysqli->prepare('INSERT INTO `emails` (`email`) VALUES (?)');
-					if ($stmt) {
-						$stmt->bind_param('s', $emailInput);
-						$ok = $stmt->execute();
-						if ($ok) {
-							$subscribeFlash = 'Thanks! You are subscribed.';
-							$subscribeType = 'success';
-							$_POST['email'] = '';
-						} else {
-							if ($mysqli->errno === 1062) {
-								$subscribeFlash = 'This email is already subscribed.';
-								$subscribeType = 'success';
-							} else {
-								$subscribeFlash = 'Subscription failed. Please try again later.';
-								$subscribeType = 'error';
-							}
-						}
-						$stmt->close();
+			// Ensure table
+			$createTable = "CREATE TABLE IF NOT EXISTS `emails` (
+				`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+				`email` VARCHAR(255) NOT NULL,
+				`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (`id`),
+				UNIQUE KEY `uniq_email` (`email`),
+				INDEX `idx_created_at` (`created_at`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+			if ($mysqli->query($createTable)) {
+				$stmt = $mysqli->prepare('INSERT INTO `emails` (`email`) VALUES (?)');
+				if ($stmt) {
+					$stmt->bind_param('s', $emailInput);
+					$ok = $stmt->execute();
+					if ($ok) {
+						$subscribeFlash = 'Thanks! You are subscribed.';
+						$subscribeType = 'success';
+						$_POST['email'] = '';
 					} else {
-						$subscribeFlash = 'Could not prepare subscription statement.';
-						$subscribeType = 'error';
+						if ($mysqli->errno === 1062) {
+							$subscribeFlash = 'This email is already subscribed.';
+							$subscribeType = 'success';
+						} else {
+							$subscribeFlash = 'Subscription failed. Please try again later.';
+							$subscribeType = 'error';
+						}
 					}
+					$stmt->close();
 				} else {
-					$subscribeFlash = 'Could not ensure emails table.';
+					$subscribeFlash = 'Could not prepare subscription statement.';
 					$subscribeType = 'error';
 				}
 			} else {
-				$subscribeFlash = 'Could not ensure database.';
+				$subscribeFlash = 'Could not ensure emails table.';
 				$subscribeType = 'error';
 			}
 			$mysqli->close();
@@ -213,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
 <body style="margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';">
     <nav role="navigation" aria-label="Primary">
         <div class="container">
-            <a href="#hero" class="brand">Elisense Enterprise</a>
+            <a href="/" class="brand">Elisense Enterprise</a>
 
             <!-- Navigation Links Container -->
             <ul id="nav-links">
@@ -357,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
         </svg>
         <!-- Local image background -->
         <div
-            style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:0; opacity:0.18; background-image:url('./images/success-hero.jpg'); background-size:cover; background-position:center;">
+            style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:0; opacity:0.18; background-image:url('/images/success-hero.jpg'); background-size:cover; background-position:center;">
         </div>
         <div style="position:relative;z-index:1;width:90vw;max-width:700px;padding-top:9vh;padding-bottom:9vh;">
             <h1 style="color:#fff;font-size:2.6rem;font-weight:800;line-height:1.2;margin-bottom:2vh;">Global Trade &
@@ -657,7 +651,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
                 style="flex: 1 1 280px; min-width: 280px; padding: 0 0.5rem;">
                 <h2 id="footer-cta-title" style="color: #00aaff; font-size: 1.8rem; margin-bottom: 1rem;">Ready to
                     Elevate Your Global Sourcing?</h2>
-                <a href="#contact" class="footer-cta"
+                <a href="/bookmeeting.php" class="footer-cta"
                     style="display: inline-block; background-color: #00aaff; color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 700; text-decoration: none; transition: background-color 0.3s ease;"
                     onmouseover="this.style.backgroundColor='#007acc';"
                     onmouseout="this.style.backgroundColor='#00aaff';"
@@ -671,18 +665,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe_action'])) 
                 style="flex: 1 1 200px; min-width: 200px; padding: 0 0.5rem;">
                 <h3 style="color: #00aaff; margin-bottom: 1rem; font-weight: 700;">Quick Links</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
-                    <li><a href="#hero" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#hero" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Home</a></li>
-                    <li><a href="#about-carousel-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#about-carousel-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">About Us</a>
                     </li>
-                    <li><a href="#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';"
                             onmouseout="this.style.color='#ccc';">Certifications</a></li>
-                    <li><a href="#problem-cta-section" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/#problem-cta-section" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Solutions</a>
                     </li>
-                    <li><a href="#contact" style="color: #ccc; text-decoration: none;"
+                    <li><a href="/contact.php" style="color: #ccc; text-decoration: none;"
                             onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Contact</a>
                     </li>
                     <li><a href="/shipping-policy" style="color: #ccc; text-decoration: none;"

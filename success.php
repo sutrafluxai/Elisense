@@ -147,11 +147,11 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
 <body style="margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';">
   <nav role="navigation" aria-label="Primary">
     <div class="container">
-      <a href="#hero" class="brand">Elisense Enterprise</a>
+      <a href="/" class="brand">Elisense Enterprise</a>
 
       <!-- Navigation Links Container -->
       <ul id="nav-links">
-        <li><a href="./home.php">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="./success.php">Success</a></li>
         <li><a href="./insights.php">Insights</a></li>
         <li><a href="./contact.php">Contact Us</a></li>
@@ -210,7 +210,7 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
     </svg>
     <!-- Local image background -->
     <div
-      style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:0; opacity:0.18; background-image:url('./images/success-hero.jpg'); background-size:cover; background-position:center;">
+      style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:0; opacity:0.18; background-image:url('/images/success-hero.jpg'); background-size:cover; background-position:center;">
     </div>
     <div style="position:relative;z-index:1;width:90vw;max-width:700px;padding-top:9vh;padding-bottom:9vh;">
       <h1 style="color:#fff;font-size:2.6rem;font-weight:800;line-height:1.2;margin-bottom:2vh;">Global Success Stories
@@ -427,7 +427,7 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
         style="flex: 1 1 280px; min-width: 280px; padding: 0 0.5rem;">
         <h2 id="footer-cta-title" style="color: #00aaff; font-size: 1.8rem; margin-bottom: 1rem;">Ready to Elevate Your
           Global Sourcing?</h2>
-        <a href="#contact" class="footer-cta"
+        <a href="/bookmeeting.php" class="footer-cta"
           style="display: inline-block; background-color: #00aaff; color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 700; text-decoration: none; transition: background-color 0.3s ease;"
           onmouseover="this.style.backgroundColor='#007acc';" onmouseout="this.style.backgroundColor='#00aaff';"
           aria-label="Book a meeting with Elisense Enterprise">
@@ -440,15 +440,15 @@ $companyTagline = "A Revolution in International Product Sourcing and Global Tra
         style="flex: 1 1 200px; min-width: 200px; padding: 0 0.5rem;">
         <h3 style="color: #00aaff; margin-bottom: 1rem; font-weight: 700;">Quick Links</h3>
         <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
-          <li><a href="#hero" style="color: #ccc; text-decoration: none;" onmouseover="this.style.color='white';"
+          <li><a href="/#hero" style="color: #ccc; text-decoration: none;" onmouseover="this.style.color='white';"
               onmouseout="this.style.color='#ccc';">Home</a></li>
-          <li><a href="#about-carousel-section" style="color: #ccc; text-decoration: none;"
+          <li><a href="/#about-carousel-section" style="color: #ccc; text-decoration: none;"
               onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">About Us</a></li>
-          <li><a href="#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
+          <li><a href="/#certifications-compliance-section" style="color: #ccc; text-decoration: none;"
               onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Certifications</a></li>
-          <li><a href="#problem-cta-section" style="color: #ccc; text-decoration: none;"
+          <li><a href="/#problem-cta-section" style="color: #ccc; text-decoration: none;"
               onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Solutions</a></li>
-          <li><a href="#contact" style="color: #ccc; text-decoration: none;" onmouseover="this.style.color='white';"
+          <li><a href="/contact.php" style="color: #ccc; text-decoration: none;" onmouseover="this.style.color='white';"
               onmouseout="this.style.color='#ccc';">Contact</a></li>
           <li><a href="/shipping-policy" style="color: #ccc; text-decoration: none;"
               onmouseover="this.style.color='white';" onmouseout="this.style.color='#ccc';">Shipping Policy</a></li>
